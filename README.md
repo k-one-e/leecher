@@ -94,7 +94,7 @@ sudo systemctl start leecher
 ### 4. Open the UI
 
 ```
-http://<your-ip>:8080
+http://<your-ip>:9090
 ```
 
 Replace `<your-ip>` with your machine's IP address (e.g. `192.168.1.50`).
@@ -144,7 +144,7 @@ Edit `/opt/leecher/config.json`:
 
 ```json
 {
-  "port": 8080,
+  "port": 9090,
   "host": "0.0.0.0",
   "downloads_dir": "./downloads",
   "max_file_age_minutes": 60,
@@ -165,7 +165,7 @@ Edit `/opt/leecher/config.json`:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `port` | `8080` | HTTP server port |
+| `port` | `9090` | HTTP server port |
 | `host` | `0.0.0.0` | Bind address |
 | `downloads_dir` | `./downloads` | Where downloaded files are stored |
 | `max_file_age_minutes` | `60` | Auto-delete files older than this (minutes) |
@@ -230,7 +230,7 @@ This prints a hash like `$2a$10$...` — copy it.
 sudo systemctl restart leecher
 ```
 
-Now visit `http://<your-ip>:8080/admin` to log in. The admin panel provides:
+Now visit `http://<your-ip>:9090/admin` to log in. The admin panel provides:
 
 - **File manager** — view, download, and delete files in the downloads directory
 - **Settings** — edit all runtime settings and persist to `config.json` without restarting
@@ -315,7 +315,7 @@ sudo systemctl status leecher
 journalctl -u leecher -f
 ```
 
-Check for port conflicts (`lsof -i :8080`) or config syntax errors.
+Check for port conflicts (`lsof -i :9090`) or config syntax errors.
 
 ---
 
