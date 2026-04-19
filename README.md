@@ -4,6 +4,8 @@ Lightweight, self-hosted media downloader with a web UI.
 
 `leecher` lets you paste a link from YouTube, Twitter, Instagram, TikTok, Reddit, and dozens more — pick a format, download it. No cloud, no accounts, no subscriptions — runs entirely on your own hardware, even a Raspberry Pi.
 
+![Leecher screenshot](assets/screenshot.jpeg)
+
 ---
 
 ## Table of Contents
@@ -41,17 +43,22 @@ A single binary web server you run on any machine. Open the browser, paste a URL
 - **Web UI** — clean dark interface with neon green theme, works on desktop and mobile
 - **Format selection** — fetch available formats before downloading, pick resolution/codec/size
 - **Quality presets** — Best quality, 1080p, and audio-only (MP3) one-click options
-- **Real-time progress** — live progress ring, percentage, speed, and ETA
-- **Admin panel** — manage files, change settings, all behind session-based auth with bcrypt password hashing
+- **Real-time progress** — WebSocket-powered live progress ring, percentage, speed, and ETA (with polling fallback)
+- **Admin panel** — file manager, download history, credential management, yt-dlp updates, runtime settings — all behind session-based auth with bcrypt password hashing
+- **Rate limiting** — per-IP token-bucket rate limiting for format queries and downloads
 - **Disk protection** — pre-download free space checks, storage caps, per-file size limits
 - **Auto-cleanup** — old files purged by age, storage limit enforced, orphan directories removed
 - **Crash recovery** — stale job directories cleaned up automatically on startup
 - **Cookie support** — pass browser cookies or a cookie file to yt-dlp for authenticated downloads
+- **Security** — CSRF protection, Content Security Policy, security headers, URL allowlist
 - **30+ platforms** — YouTube, Twitter/X, Instagram, TikTok, Reddit, Vimeo, SoundCloud, Twitch, and more
 - **Single binary** — HTML, CSS, and JS embedded at compile time, nothing to configure
 - **Cross-platform** — Linux (amd64/arm64/arm), macOS (amd64/arm64), Windows (amd64)
 - **Runs as a systemd service** — starts on boot, restarts on failure
 - **Installs yt-dlp and ffmpeg automatically** if missing
+- **Automatic yt-dlp updates** — background check every 24 hours, or trigger manually from the admin panel
+- **Structured JSON logging** — machine-readable logs via Go's slog
+- **Graceful shutdown** — handles SIGINT with timeout for clean process cleanup
 
 ---
 
@@ -134,7 +141,7 @@ cd /opt/leecher
 sudo bash uninstall.sh
 ```
 
-This stops the service, removes it from the system, and optionally deletes downloaded files. You can then delete `/opt/leecher` to remove everything.
+This stops the service, removes the `leecher` system user, and optionally deletes downloaded files. You can then delete `/opt/leecher` to remove everything.
 
 ---
 
@@ -159,7 +166,9 @@ Edit `/opt/leecher/config.json`:
   "session_hours": 72,
   "max_file_size_mb": 0,
   "max_storage_mb": 0,
-  "min_disk_free_mb": 500
+  "min_disk_free_mb": 500,
+  "rate_limit_formats": 5,
+  "rate_limit_downloads": 3
 }
 ```
 
@@ -181,6 +190,8 @@ Edit `/opt/leecher/config.json`:
 | `max_file_size_mb` | `0` | Reject files larger than this (0 = no limit) |
 | `max_storage_mb` | `0` | Total downloads folder cap; oldest files auto-deleted (0 = no limit) |
 | `min_disk_free_mb` | `500` | Refuse downloads if free disk space is below this (MB) |
+| `rate_limit_formats` | `5` | Per-IP rate limit for format queries per minute (1–60) |
+| `rate_limit_downloads` | `3` | Per-IP rate limit for download requests per minute (1–60) |
 
 After changing the config, restart the service:
 
@@ -233,8 +244,11 @@ sudo systemctl restart leecher
 Now visit `http://<your-ip>:9090/admin` to log in. The admin panel provides:
 
 - **File manager** — view, download, and delete files in the downloads directory
-- **Settings** — edit all runtime settings and persist to `config.json` without restarting
-- **Stats** — total file count, storage used
+- **Settings** — edit all runtime settings (including rate limits) and persist to `config.json` without restarting
+- **Stats** — total file count, storage used, disk usage
+- **Download history** — log of the last 500 download jobs with status, URL, and timestamps
+- **Credential management** — change admin username and password from the UI
+- **yt-dlp update** — trigger a yt-dlp update directly from the admin panel
 
 Settings changed via the admin panel are applied immediately and saved to disk.
 
@@ -251,11 +265,15 @@ To disable, remove or empty `admin_user` and `admin_hash` in `config.json` and r
 | `POST` | `/api/formats` | Fetch available formats for a URL |
 | `POST` | `/api/download` | Start a download job |
 | `GET` | `/api/status/{id}` | Poll job progress |
+| `WS` | `/ws/status/{id}` | WebSocket real-time progress updates |
 | `POST` | `/api/cancel/{id}` | Cancel a running download |
 | `GET` | `/api/admin/files` | List downloaded files (auth required) |
 | `POST` | `/api/admin/delete/{filename}` | Delete a file (auth required) |
 | `GET` | `/api/admin/settings` | Get current settings (auth required) |
 | `POST` | `/api/admin/settings` | Update settings (auth required) |
+| `POST` | `/api/admin/credentials` | Change admin username/password (auth required) |
+| `GET` | `/api/admin/history` | Get download history (auth required) |
+| `POST` | `/api/admin/update-ytdlp` | Trigger yt-dlp update (auth required) |
 
 ---
 
