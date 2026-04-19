@@ -73,7 +73,8 @@ Pick your platform:
 ### 2. Install (Linux)
 
 ```bash
-curl -fsSL https://github.com/k-one-e/leecher/releases/download/latest/leecher-linux-$(uname -m).tar.gz | tar xz
+ARCH=$(uname -m); case $ARCH in x86_64) ARCH=amd64;; aarch64) ARCH=arm64;; armv7l|armv6l) ARCH=arm;; esac
+curl -fsSL https://github.com/k-one-e/leecher/releases/latest/download/leecher-linux-${ARCH}.tar.gz | tar xz
 sudo mv leecher /opt/leecher
 cd /opt/leecher
 sudo bash install.sh
