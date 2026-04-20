@@ -45,11 +45,15 @@ A single binary web server you run on any machine. Open the browser, paste a URL
 - **Quality presets** — Best quality, 1080p, and audio-only (MP3) one-click options
 - **Real-time progress** — WebSocket-powered live progress ring, percentage, speed, and ETA (with polling fallback)
 - **Admin panel** — file manager, download history, credential management, yt-dlp updates, runtime settings — all behind session-based auth with bcrypt password hashing
+- **Live admin updates** — Server-Sent Events push file table changes to the admin panel in real time
 - **Rate limiting** — per-IP token-bucket rate limiting for format queries and downloads
 - **Disk protection** — pre-download free space checks, storage caps, per-file size limits
 - **Auto-cleanup** — old files purged by age, storage limit enforced, orphan directories removed
 - **Crash recovery** — stale job directories cleaned up automatically on startup
 - **Cookie support** — pass browser cookies or a cookie file to yt-dlp for authenticated downloads
+- **YouTube anti-throttle** — uses iOS player client to avoid DASH fragment 403 errors
+- **Debug mode** — toggle yt-dlp log output on the download page from admin settings
+- **Configurable timezone** — IANA timezone for all displayed timestamps (server-side and client-side)
 - **Security** — CSRF protection, Content Security Policy, security headers, URL allowlist
 - **30+ platforms** — YouTube, Twitter/X, Instagram, TikTok, Reddit, Vimeo, SoundCloud, Twitch, and more
 - **Single binary** — HTML, CSS, and JS embedded at compile time, nothing to configure
@@ -168,7 +172,9 @@ Edit `/opt/leecher/config.json`:
   "max_storage_mb": 0,
   "min_disk_free_mb": 500,
   "rate_limit_formats": 5,
-  "rate_limit_downloads": 3
+  "rate_limit_downloads": 3,
+  "time_zone": "Europe/Berlin",
+  "debug_mode": false
 }
 ```
 
@@ -192,6 +198,8 @@ Edit `/opt/leecher/config.json`:
 | `min_disk_free_mb` | `500` | Refuse downloads if free disk space is below this (MB) |
 | `rate_limit_formats` | `5` | Per-IP rate limit for format queries per minute (1–60) |
 | `rate_limit_downloads` | `3` | Per-IP rate limit for download requests per minute (1–60) |
+| `time_zone` | `Europe/Berlin` | IANA timezone for displayed timestamps (e.g. `UTC`, `America/New_York`) |
+| `debug_mode` | `false` | Show yt-dlp log output on the download page |
 
 After changing the config, restart the service:
 
@@ -244,11 +252,12 @@ sudo systemctl restart leecher
 Now visit `http://<your-ip>:9090/admin` to log in. The admin panel provides:
 
 - **File manager** — view, download, and delete files in the downloads directory
-- **Settings** — edit all runtime settings (including rate limits) and persist to `config.json` without restarting
+- **Settings** — edit all runtime settings (including rate limits, timezone, debug mode) and persist to `config.json` without restarting
 - **Stats** — total file count, storage used, disk usage
 - **Download history** — log of the last 500 download jobs with status, URL, and timestamps
 - **Credential management** — change admin username and password from the UI
 - **yt-dlp update** — trigger a yt-dlp update directly from the admin panel
+- **Real-time file updates** — file table and history update automatically via SSE when downloads complete or files are deleted
 
 Settings changed via the admin panel are applied immediately and saved to disk.
 
@@ -274,6 +283,7 @@ To disable, remove or empty `admin_user` and `admin_hash` in `config.json` and r
 | `POST` | `/api/admin/credentials` | Change admin username/password (auth required) |
 | `GET` | `/api/admin/history` | Get download history (auth required) |
 | `POST` | `/api/admin/update-ytdlp` | Trigger yt-dlp update (auth required) |
+| `GET` | `/api/admin/events` | SSE stream for real-time file change notifications (auth required) |
 
 ---
 
@@ -316,11 +326,12 @@ YouTube, Twitter/X, Instagram, TikTok, Reddit, Vimeo, SoundCloud, Twitch, Facebo
 
 Some sites only offer limited formats. Use the "Best quality" preset, which automatically selects the highest available.
 
-### YouTube rate limiting (HTTP 429)
+### YouTube rate limiting (HTTP 403/429)
 
-YouTube throttles frequent requests. Options:
+YouTube throttles frequent requests and blocks DASH fragment downloads with 403 errors. Leecher uses the iOS player client by default to avoid fragmented streams. Additional options:
 - Set `cookies_from_browser` to your browser name (e.g. `chrome`) in `config.json`
 - Or export cookies to a file and set `cookies_file`
+- Make sure yt-dlp is up to date (update from admin panel or `sudo yt-dlp -U`)
 
 ### Admin panel not showing
 
