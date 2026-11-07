@@ -195,7 +195,7 @@ Edit `/opt/leecher/config.json`:
   "cookies_from_browser": "",
   "cookies_file": "",
   "js_runtimes": "",
-  "admin_user": "admin",
+  "admin_user": "",
   "admin_hash": "",
   "session_hours": 72,
   "max_file_size_mb": 0,
