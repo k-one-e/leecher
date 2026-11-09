@@ -1,0 +1,745 @@
+--- cpu/byteorder.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package cpu implements processor feature detection for
+// various CPU architectures.
+
+--- cpu/cpu_arm.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu_arm64.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu_darwin_arm64.go ---
+// Copyright 2026 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin && arm64 && gc
+
+
+--- cpu/cpu_darwin_x86.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin && amd64 && gc
+
+
+--- cpu/cpu_gc_arm64.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build gc
+
+
+--- cpu/cpu_gc_x86.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (386 || amd64 || amd64p32) && gc
+
+
+--- cpu/cpu_linux.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build !386 && !amd64 && !amd64p32 && !arm64
+
+
+--- cpu/cpu_linux_arm.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu_linux_arm64.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu_linux_noinit.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux && !arm && !arm64 && !loong64 && !mips64 && !mips64le && !ppc64 && !ppc64le && !s390x && !riscv64
+
+
+--- cpu/cpu_other_x86.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build 386 || amd64p32 || (amd64 && ((!darwin && !netbsd) || !gc))
+
+
+--- cpu/cpu_windows.go ---
+// Copyright 2026 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/cpu_x86.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build 386 || amd64 || amd64p32
+
+
+--- cpu/endian_little.go ---
+// Copyright 2023 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build 386 || amd64 || amd64p32 || alpha || arm || arm64 || loong64 || mipsle || mips64le || mips64p32le || nios2 || ppc64le || riscv || riscv64 || sh || wasm
+
+
+--- cpu/hwcap_linux.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/parse.go ---
+// Copyright 2022 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/proc_cpuinfo_linux.go ---
+// Copyright 2022 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux && arm64
+
+
+--- cpu/runtime_auxv.go ---
+// Copyright 2023 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cpu/runtime_auxv_go121.go ---
+// Copyright 2023 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build go1.21
+
+
+--- cpu/syscall_darwin_arm64_gc.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Minimal copy from internal/cpu and runtime to make sysctl calls.
+
+//go:build darwin && arm64 && gc
+
+
+--- cpu/syscall_darwin_x86_gc.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Minimal copy of x/sys/unix so the cpu package can make a
+// system call on Darwin without depending on x/sys/unix.
+
+//go:build darwin && amd64 && gc
+
+
+--- unix/affinity_linux.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// CPU affinity functions
+
+
+--- unix/aliases.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/auxv.go ---
+// Copyright 2025 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build go1.21 && (aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos)
+
+
+--- unix/bluetooth_linux.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Bluetooth sockets and messages
+
+
+--- unix/constants.go ---
+// Copyright 2015 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/dev_darwin.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Functions to access/create device major and minor numbers matching the
+// encoding used in Darwin's sys/types.h header.
+
+
+--- unix/dev_linux.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Functions to access/create device major and minor numbers matching the
+// encoding used by the Linux kernel and glibc.
+//
+// The information below is extracted and adapted from bits/sysmacros.h in the
+// glibc sources:
+//
+// dev_t in glibc is 64-bit, with 32-bit major and minor numbers. glibc's
+// default encoding is MMMM Mmmm mmmM MMmm, where M is a hex digit of the major
+// number and m is a hex digit of the minor number. This is backward compatible
+// with legacy systems where dev_t is 16 bits wide, encoded as MMmm. It is also
+// backward compatible with the Linux kernel, which for some architectures uses
+// 32-bit dev_t, encoded as mmmM MMmm.
+
+
+--- unix/dirent.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/endian_little.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+//
+//go:build 386 || amd64 || amd64p32 || alpha || arm || arm64 || loong64 || mipsle || mips64le || mips64p32le || nios2 || ppc64le || riscv || riscv64 || sh
+
+
+--- unix/env_unix.go ---
+// Copyright 2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+// Unix environment variables.
+
+
+--- unix/fcntl.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build dragonfly || freebsd || linux || netbsd
+
+
+--- unix/fcntl_darwin.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- unix/fcntl_linux_32bit.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (linux && 386) || (linux && arm) || (linux && mips) || (linux && mipsle) || (linux && ppc)
+
+
+--- unix/fdset.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/ifreq_linux.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux
+
+
+--- unix/ioctl_linux.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- unix/ioctl_unsigned.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin || dragonfly || freebsd || hurd || linux || netbsd || openbsd
+
+
+--- unix/mmap_nomremap.go ---
+// Copyright 2023 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || openbsd || solaris || zos
+
+
+--- unix/mremap.go ---
+// Copyright 2023 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux || netbsd
+
+
+--- unix/pagesize_unix.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+// For Unix, get the pagesize from the runtime.
+
+
+--- unix/ptrace_darwin.go ---
+// Copyright 2020 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin && !ios
+
+
+--- unix/race0.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || (darwin && !race) || (linux && !race) || (freebsd && !race) || netbsd || openbsd || solaris || dragonfly || zos
+
+
+--- unix/readdirent_getdents.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || dragonfly || freebsd || linux || netbsd || openbsd
+
+
+--- unix/readdirent_getdirentries.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin || zos
+
+
+--- unix/readv_unix.go ---
+// Copyright 2026 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin || linux || openbsd
+
+
+--- unix/sockcmsg_linux.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Socket control messages
+
+
+--- unix/sockcmsg_unix.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+// Socket control messages
+
+
+--- unix/sockcmsg_unix_other.go ---
+// Copyright 2019 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/syscall.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+// Package unix contains an interface to the low-level operating system
+// primitives. OS details vary depending on the underlying system, and
+// by default, godoc will display OS-specific documentation for the current
+// system. If you want godoc to display OS documentation for another
+// system, set $GOOS and $GOARCH to the desired system. For example, if
+// you want to view documentation for freebsd/arm on linux/amd64, set $GOOS
+// to freebsd and $GOARCH to arm.
+//
+// The primary use of this package is inside other packages that provide a more
+// portable interface to the system, such as "os", "time" and "net".  Use
+// those packages rather than this one if you can.
+//
+// For details of the functions and data types in this package consult
+// the manuals for the appropriate operating system.
+//
+// These calls return err == nil to indicate success; otherwise
+// err represents an operating system error describing the failure and
+// holds a value of type syscall.Errno.
+
+--- unix/syscall_bsd.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin || dragonfly || freebsd || netbsd || openbsd
+
+// BSD system call wrappers shared by *BSD based systems
+// including OS X (Darwin) and FreeBSD.  Like the other
+// syscall_*.go files it is compiled as Go code but also
+// used as input to mksyscall which parses the //sys
+// lines and generates system call stubs.
+
+
+--- unix/syscall_darwin.go ---
+// Copyright 2009,2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Darwin system calls.
+// This file is compiled as ordinary Go code,
+// but it is also input to mksyscall,
+// which parses the //sys lines and generates system call stubs.
+// Note that sometimes we use a lowercase //sys name and wrap
+// it in our own nicer implementation, either here or in
+// syscall_bsd.go or syscall_unix.go.
+
+
+--- unix/syscall_darwin_amd64.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build amd64 && darwin
+
+
+--- unix/syscall_darwin_arm64.go ---
+// Copyright 2015 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build arm64 && darwin
+
+
+--- unix/syscall_darwin_libSystem.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build darwin
+
+
+--- unix/syscall_linux.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Linux system calls.
+// This file is compiled as ordinary Go code,
+// but it is also input to mksyscall,
+// which parses the //sys lines and generates system call stubs.
+// Note that sometimes we use a lowercase //sys name and
+// wrap it in our own nicer implementation.
+
+
+--- unix/syscall_linux_alarm.go ---
+// Copyright 2022 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux && (386 || amd64 || mips || mipsle || mips64 || mipsle || ppc64 || ppc64le || ppc || s390x || sparc64)
+
+
+--- unix/syscall_linux_amd64.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build amd64 && linux
+
+
+--- unix/syscall_linux_amd64_gc.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build amd64 && linux && gc
+
+
+--- unix/syscall_linux_arm.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build arm && linux
+
+
+--- unix/syscall_linux_arm64.go ---
+// Copyright 2015 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build arm64 && linux
+
+
+--- unix/syscall_linux_gc.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux && gc
+
+
+--- unix/syscall_linux_gc_arm.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build arm && gc && linux
+
+
+--- unix/syscall_unix.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris
+
+
+--- unix/syscall_unix_gc.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris) && gc
+
+
+--- unix/sysvshm_linux.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux
+
+
+--- unix/sysvshm_unix.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (darwin && !ios) || linux || zos
+
+
+--- unix/sysvshm_unix_other.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (darwin && !ios) || zos
+
+
+--- unix/timestruct.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || zos
+
+
+--- unix/vgetrandom_linux.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build linux && go1.24
+
+
+--- unix/vgetrandom_unsupported.go ---
+// Copyright 2024 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build !linux || !go1.24
+
+
+--- windows/aliases.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows
+
+
+--- windows/dll_windows.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- windows/env_windows.go ---
+// Copyright 2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Windows environment variables.
+
+
+--- windows/eventlog.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows
+
+
+--- windows/exec_windows.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Fork, exec, wait, etc.
+
+
+--- windows/memory_windows.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- windows/race0.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows && !race
+
+
+--- windows/security_windows.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- windows/service.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows
+
+
+--- windows/setupapi_windows.go ---
+// Copyright 2021 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- windows/str.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows
+
+
+--- windows/syscall.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build windows
+
+// Package windows contains an interface to the low-level operating system
+// primitives. OS details vary depending on the underlying system, and
+// by default, godoc will display the OS-specific documentation for the current
+// system. If you want godoc to display syscall documentation for another
+// system, set $GOOS and $GOARCH to the desired system. For example, if
+// you want to view documentation for freebsd/arm on linux/amd64, set $GOOS
+// to freebsd and $GOARCH to arm.
+//
+// The primary use of this package is inside other packages that provide a more
+// portable interface to the system, such as "os", "time" and "net".  Use
+// those packages rather than this one if you can.
+//
+// For details of the functions and data types in this package consult
+// the manuals for the appropriate operating system.
+//
+// These calls return err == nil to indicate success; otherwise
+// err represents an operating system error describing the failure and
+// holds a value of type syscall.Errno.
+
+--- windows/syscall_windows.go ---
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Windows system calls.
+
+
+--- windows/types_windows.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- windows/types_windows_amd64.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+

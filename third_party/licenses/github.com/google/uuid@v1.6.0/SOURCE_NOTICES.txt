@@ -1,0 +1,98 @@
+--- dce.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- doc.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package uuid generates and inspects UUIDs.
+//
+// UUIDs are based on RFC 4122 and DCE 1.1: Authentication and Security
+// Services.
+//
+// A UUID is a 16 byte (128 bit) array.  UUIDs may be used as keys to
+// maps or compared directly.
+
+--- hash.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- marshal.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- node.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- node_net.go ---
+// Copyright 2017 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build !js
+
+
+--- null.go ---
+// Copyright 2021 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- sql.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- time.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- util.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- uuid.go ---
+// Copyright 2018 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- version1.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- version4.go ---
+// Copyright 2016 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- version6.go ---
+// Copyright 2023 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- version7.go ---
+// Copyright 2023 Google Inc.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+

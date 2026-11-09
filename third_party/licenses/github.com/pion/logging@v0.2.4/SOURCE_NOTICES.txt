@@ -1,0 +1,10 @@
+--- logger.go ---
+// SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package logging provides the logging library used by Pion
+
+--- scoped.go ---
+// SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+

@@ -1,0 +1,119 @@
+--- addr.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- agent.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- attributes.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- checks.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+//go:build !debug
+
+
+--- client.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- errorcode.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- fingerprint.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- helpers.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- integrity.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/hmac/hmac.go ---
+// SPDX-FileCopyrightText: 2009 The Go Authors. All rights reserved.
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+Package hmac implements the Keyed-Hash Message Authentication Code (HMAC) as
+defined in U.S. Federal Information Processing Standards Publication 198.
+An HMAC is a cryptographic hash that uses a key to sign a message.
+The receiver verifies the hash by recomputing it using the same key.
+
+Receivers should be careful to use Equal to compare MACs in order to avoid
+timing side-channels:
+
+	// ValidMAC reports whether messageMAC is a valid HMAC tag for message.
+	func ValidMAC(message, messageMAC, key []byte) bool {
+		mac := hmac.New(sha256.New, key)
+		mac.Write(message)
+		expectedMAC := mac.Sum(nil)
+		return hmac.Equal(messageMAC, expectedMAC)
+	}
+*/
+
+--- internal/hmac/pool.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- message.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- stun.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package stun implements Session Traversal Utilities for NAT (STUN) RFC 5389.
+//
+// The stun package is intended to use by package that implements extension
+// to STUN (e.g. TURN) or client/server applications.
+//
+// Most methods are designed to be zero allocations. If it is not enough,
+// low-level methods are available. On other hand, there are helpers that
+// reduce code repeat.
+//
+// See examples for Message for basic usage, or https://github.com/pion/turn
+// package for example of stun extension implementation.
+
+--- textattrs.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- uattrs.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- uri.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- xoraddr.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+

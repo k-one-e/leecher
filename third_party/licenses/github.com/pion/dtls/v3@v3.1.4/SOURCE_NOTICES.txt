@@ -1,0 +1,709 @@
+--- certificate.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- cipher_suite.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- cipher_suite_go114.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+//go:build go1.14
+
+
+--- compression_method.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- config.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- conn.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- connection_id.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- crypto.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- dtls.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package dtls implements Datagram Transport Layer Security (DTLS) 1.2
+
+--- errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- errors_errno.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+//go:build aix || darwin || dragonfly || freebsd || linux || nacl || nacljs || netbsd || openbsd || solaris || windows
+
+// For systems having syscall.Errno.
+// Update build targets by following command:
+// $ grep -R ECONN $(go env GOROOT)/src/syscall/zerrors_*.go \
+//     | tr "." "_" | cut -d"_" -f"2" | sort | uniq
+
+
+--- flight.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight0handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight1handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight2handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight3handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight4bhandler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight4handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight5bhandler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight5handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flight6handler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- flighthandler.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- fragment_buffer.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- handshake_cache.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- handshaker.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/aes_128_ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/aes_256_ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/aes_ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/ciphersuite.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package ciphersuite provides TLS Ciphers as registered with the IANA
+// https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-4
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_aes_128_ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_aes_128_ccm8.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_aes_128_gcm_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_aes_256_cbc_sha.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_aes_256_gcm_sha384.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_ecdsa_with_chacha20_poly1305_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_psk_with_aes_128_cbc_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_rsa_with_aes_128_gcm_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_rsa_with_aes_256_cbc_sha.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_rsa_with_aes_256_gcm_sha384.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_ecdhe_rsa_with_chacha20_poly1305_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_aes_128_cbc_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_aes_128_ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_aes_128_ccm8.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_aes_128_gcm_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_aes_256_ccm8.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/tls_psk_with_chacha20_poly1305_sha256.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/types/authentication_type.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- internal/ciphersuite/types/key_exchange_algorithm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package types provides types for TLS Ciphers
+
+--- internal/closer/closer.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package closer provides signaling channel for shutdown
+
+--- internal/net/buffer.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package net implements DTLS specific networking primitives.
+// NOTE: this package is an adaption of pion/transport/packetio that allows for
+// storing a remote address alongside each packet in the buffer and implements
+// relevant methods of net.PacketConn. If possible, the updates made in this
+// repository will be reflected back upstream. If not, it is likely that this
+// will be moved to a public package in this repository.
+//
+// This package was migrated from pion/transport/packetio at
+// https://github.com/pion/transport/commit/6890c795c807a617c054149eee40a69d7fdfbfdb
+
+--- internal/net/udp/packet_conn.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package udp implements DTLS specific UDP networking primitives.
+// NOTE: this package is an adaption of pion/transport/udp that allows for
+// routing datagrams based on identifiers other than the remote address. The
+// primary use case for this functionality is routing based on DTLS connection
+// IDs. In order to allow for consumers of this package to treat connections as
+// generic net.PackageConn, routing and identitier establishment is based on
+// custom introspecion of datagrams, rather than direct intervention by
+// consumers. If possible, the updates made in this repository will be reflected
+// back upstream. If not, it is likely that this will be moved to a public
+// package in this repository.
+//
+// This package was migrated from pion/transport/udp at
+// https://github.com/pion/transport/commit/6890c795c807a617c054149eee40a69d7fdfbfdb
+
+--- internal/util/util.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package util contains small helpers used across the repo
+
+--- listener.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- options.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- packet.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/ccm/ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package ccm implements a CCM, Counter with CBC-MAC
+// as per RFC 3610.
+//
+// See https://tools.ietf.org/html/rfc3610
+//
+// This code was lifted from https://github.com/bocajim/dtls/blob/a3300364a283fcb490d28a93d7fcfa7ba437fbbe/ccm/ccm.go
+// and as such was not written by the Pions authors. Like Pions this
+// code is licensed under MIT.
+//
+// A request for including CCM into the Go standard library
+// can be found as issue #27484 on the https://github.com/golang/go/
+// repository.
+
+--- pkg/crypto/ciphersuite/cbc.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/ciphersuite/ccm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/ciphersuite/chacha20poly1305.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/ciphersuite/ciphersuite.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package ciphersuite provides the crypto operations needed for a DTLS CipherSuite
+
+--- pkg/crypto/ciphersuite/gcm.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/clientcertificate/client_certificate.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package clientcertificate provides all the support Client Certificate types
+
+--- pkg/crypto/elliptic/elliptic.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package elliptic provides elliptic curve cryptography for DTLS
+
+--- pkg/crypto/fingerprint/fingerprint.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package fingerprint provides a helper to create fingerprint string from certificate
+
+--- pkg/crypto/fingerprint/hash.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/hash/hash.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package hash provides TLS HashAlgorithm as defined in TLS 1.2
+
+--- pkg/crypto/prf/prf.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package prf implements TLS 1.2 Pseudorandom functions
+
+--- pkg/crypto/signature/signature.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package signature provides our implemented Signature Algorithms
+
+--- pkg/crypto/signaturehash/errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/signaturehash/select_13.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/crypto/signaturehash/signaturehash.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package signaturehash provides the SignatureHashAlgorithm as defined in TLS 1.2
+
+--- pkg/crypto/signaturehash/signaturehash_13.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/net/net.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package net defines packet-oriented primitives that are compatible with net
+// in the standard library.
+
+--- pkg/protocol/alert/alert.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package alert implements TLS alert protocol https://tools.ietf.org/html/rfc5246#section-7.2
+
+--- pkg/protocol/application_data.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/change_cipher_spec.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/compression_method.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/content.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/alpn.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/certificate_auth.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/connection_id.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/cookie.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/early_data_indication.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/extension.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package extension implements the extension values in the ClientHello/ServerHello
+
+--- pkg/protocol/extension/generic_signature_hash_extension.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package extension implements the extension values in the ClientHello/ServerHello
+
+--- pkg/protocol/extension/key_share.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/oid_filters.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/post_handshake_auth.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/pre_shared_key.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/psk_key_exchange_modes.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/renegotiation_info.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/server_name.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/signature_algorithms_cert.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/srtp_protection_profile.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/supported_elliptic_curves.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/supported_point_formats.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/supported_signature_algorithms.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/supported_versions.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/use_master_secret.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/extension/use_srtp.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/cipher_suite.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/handshake.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package handshake provides the DTLS wire protocol for handshakes
+
+--- pkg/protocol/handshake/header.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_certificate.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_certificate_13.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_certificate_request.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_certificate_request_13.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_certificate_verify.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_client_hello.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_client_key_exchange.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_finished.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_hello_verify_request.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_server_hello.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_server_hello_done.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/message_server_key_exchange.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/handshake/random.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/recordlayer/errors.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package recordlayer implements the TLS Record Layer https://tools.ietf.org/html/rfc5246#section-6
+
+--- pkg/protocol/recordlayer/header.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/recordlayer/inner_plaintext.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/recordlayer/recordlayer.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- pkg/protocol/version.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+// Package protocol provides the DTLS wire format
+
+--- resume.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- session.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- srtp_protection_profile.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- state.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+
+
+--- util.go ---
+// SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
+// SPDX-License-Identifier: MIT
+

@@ -1,0 +1,22 @@
+/* Sign-in and password pages; builds on style.css. */
+body.auth-page { align-items: center; justify-content: center; padding: 1.5rem 1rem 0; }
+.auth-card {
+    width: 100%; max-width: 400px; margin: auto auto 0; padding: 2rem 1.75rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow);
+}
+.auth-brand { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.75rem; }
+.auth-card h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: -.025em; }
+.auth-card .sub { margin-top: .3rem; color: var(--text-2); font-size: .92rem; }
+.auth-card form { margin-top: 1.1rem; }
+.auth-card .btn { width: 100%; margin-top: 1.4rem; }
+.auth-card .error {
+    margin-top: 1.1rem; padding: .7rem .85rem; border-radius: var(--radius-sm);
+    border: 1px solid var(--danger-line); background: var(--danger-soft); color: #fecaca; font-size: .86rem;
+}
+.auth-card .banner {
+    margin-bottom: 1.25rem; padding: .7rem .85rem; border-radius: var(--radius-sm);
+    border: 1px solid rgba(251, 191, 36, .35); background: rgba(251, 191, 36, .1); color: #fde68a; font-size: .86rem; line-height: 1.5;
+}
+.auth-card code { font: .8rem var(--mono); color: var(--text); }
+.auth-foot { margin-top: 1.25rem; text-align: center; font-size: .8rem; color: var(--text-3); }
+body.auth-page .footer { margin-top: auto; }

@@ -1,0 +1,342 @@
+--- bcrypt/base64.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- bcrypt/bcrypt.go ---
+// Copyright 2011 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package bcrypt implements Provos and Mazières's bcrypt adaptive hashing
+// algorithm. See http://www.usenix.org/event/usenix99/provos/provos.pdf
+
+--- blake2b/blake2b.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package blake2b implements the BLAKE2b hash algorithm defined by RFC 7693
+// and the extendable output function (XOF) BLAKE2Xb.
+//
+// BLAKE2b is optimized for 64-bit platforms—including NEON-enabled ARMs—and
+// produces digests of any size between 1 and 64 bytes.
+// For a detailed specification of BLAKE2b see https://blake2.net/blake2.pdf
+// and for BLAKE2Xb see https://blake2.net/blake2x.pdf
+//
+// If you aren't sure which function you need, use BLAKE2b (Sum512 or New512).
+// If you need a secret-key MAC (message authentication code), use the New512
+// function with a non-nil key.
+//
+// BLAKE2X is a construction to compute hash values larger than 64 bytes. It
+// can produce hash values between 0 and 4 GiB.
+
+--- blake2b/blake2bAVX2_amd64.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build amd64 && gc && !purego
+
+
+--- blake2b/blake2b_generic.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blake2b/blake2b_ref.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (!amd64 && !loong64) || purego || !gc
+
+
+--- blake2b/blake2x.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blake2b/register.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blake2s/blake2s.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package blake2s implements the BLAKE2s hash algorithm defined by RFC 7693
+// and the extendable output function (XOF) BLAKE2Xs.
+//
+// BLAKE2s is optimized for 8- to 32-bit platforms and produces digests of any
+// size between 1 and 32 bytes.
+// For a detailed specification of BLAKE2s see https://blake2.net/blake2.pdf
+// and for BLAKE2Xs see https://blake2.net/blake2x.pdf
+//
+// If you aren't sure which function you need, use BLAKE2s (Sum256 or New256).
+// If you need a secret-key MAC (message authentication code), use the New256
+// function with a non-nil key.
+//
+// BLAKE2X is a construction to compute hash values larger than 32 bytes. It
+// can produce hash values between 0 and 65535 bytes.
+
+--- blake2s/blake2s_amd64.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build amd64 && gc && !purego
+
+
+--- blake2s/blake2s_generic.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blake2s/blake2s_ref.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (!amd64 && !386) || !gc || purego
+
+
+--- blake2s/blake2x.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blowfish/block.go ---
+// Copyright 2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- blowfish/cipher.go ---
+// Copyright 2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package blowfish implements Bruce Schneier's Blowfish encryption algorithm.
+//
+// Blowfish is a legacy cipher and its short block size makes it vulnerable to
+// birthday bound attacks (see https://sweet32.info). It should only be used
+// where compatibility with legacy systems, not security, is the goal.
+//
+// Deprecated: any new system should use AES (from crypto/aes, if necessary in
+// an AEAD mode like crypto/cipher.NewGCM) or XChaCha20-Poly1305 (from
+// golang.org/x/crypto/chacha20poly1305).
+
+--- blowfish/const.go ---
+// Copyright 2010 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// The startup permutation array and substitution boxes.
+// They are the hexadecimal digits of PI; see:
+// https://www.schneier.com/code/constants.txt.
+
+
+--- chacha20/chacha_arm64.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build gc && !purego
+
+
+--- chacha20/chacha_generic.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package chacha20 implements the ChaCha20 and XChaCha20 encryption algorithms
+// as specified in RFC 8439 and draft-irtf-cfrg-xchacha-01.
+
+--- chacha20/chacha_noasm.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (!arm64 && !loong64 && !s390x && !ppc64 && !ppc64le) || !gc || purego
+
+
+--- chacha20/xor.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found src the LICENSE file.
+
+
+--- chacha20poly1305/chacha20poly1305.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package chacha20poly1305 implements the ChaCha20-Poly1305 AEAD and its
+// extended nonce variant XChaCha20-Poly1305, as specified in RFC 8439 and
+// draft-irtf-cfrg-xchacha-01.
+
+--- chacha20poly1305/chacha20poly1305_amd64.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build gc && !purego
+
+
+--- chacha20poly1305/chacha20poly1305_generic.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- chacha20poly1305/chacha20poly1305_noasm.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build !amd64 || !gc || purego
+
+
+--- chacha20poly1305/fips140only_go1.26.go ---
+// Copyright 2025 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build go1.26
+
+
+--- chacha20poly1305/xchacha20poly1305.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cryptobyte/asn1.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cryptobyte/asn1/asn1.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package asn1 contains supporting types for parsing and building ASN.1
+// messages with the cryptobyte package.
+
+--- cryptobyte/builder.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- cryptobyte/string.go ---
+// Copyright 2017 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package cryptobyte contains types that help with parsing and constructing
+// length-prefixed, binary messages, including ASN.1 DER. (The asn1 subpackage
+// contains useful ASN.1 constants.)
+//
+// The String type is for parsing. It wraps a []byte slice and provides helper
+// functions for consuming structures, value by value.
+//
+// The Builder type is for constructing messages. It providers helper functions
+// for appending values and also for appending length-prefixed submessages –
+// without having to worry about calculating the length prefix ahead of time.
+//
+// See the documentation and examples for the Builder and String types to get
+// started.
+
+--- internal/alias/alias.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build !purego
+
+// Package alias implements memory aliasing tests.
+
+--- internal/poly1305/mac_noasm.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build (!amd64 && !loong64 && !ppc64le && !ppc64 && !riscv64 && !s390x) || !gc || purego
+
+
+--- internal/poly1305/poly1305.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package poly1305 implements Poly1305 one-time message authentication code as
+// specified in https://cr.yp.to/mac/poly1305-20050329.pdf.
+//
+// Poly1305 is a fast, one-time authentication function. It is infeasible for an
+// attacker to generate an authenticator for a message without the key. However, a
+// key must only be used for a single message. Authenticating two different
+// messages with the same key allows an attacker to forge authenticators for other
+// messages with the same key.
+//
+// Poly1305 was originally coupled with AES in order to make Poly1305-AES. AES was
+// used with a fixed key in order to generate one-time keys from an nonce.
+// However, in this package AES isn't used and the one-time key is specified
+// directly.
+
+--- internal/poly1305/sum_asm.go ---
+// Copyright 2012 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build gc && !purego && (amd64 || loong64 || ppc64 || ppc64le || riscv64)
+
+
+--- internal/poly1305/sum_generic.go ---
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// This file provides the generic implementation of Sum and MAC. Other files
+// might provide optimized assembly implementations of some of this code.
+
+
+--- sha3/hashes.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package sha3 implements the SHA-3 hash algorithms and the SHAKE extendable
+// output functions defined in FIPS 202.
+//
+// Most of this package is a wrapper around the crypto/sha3 package in the
+// standard library. The only exception is the legacy Keccak hash functions.
+
+--- sha3/legacy_hash.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- sha3/legacy_keccakf.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+
+--- sha3/shake.go ---
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+

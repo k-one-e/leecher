@@ -1,0 +1,29 @@
+--- mmap.go ---
+// Copyright 2011 Evan Shaw. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// This file defines the common package interface and contains a little bit of
+// factored out logic.
+
+// Package mmap allows mapping files into memory. It tries to provide a simple, reasonably portable interface,
+// but doesn't go out of its way to abstract away every little platform detail.
+// This specifically means:
+//	* forked processes may or may not inherit mappings
+//	* a file's timestamp may or may not be updated by writes through mappings
+//	* specifying a size larger than the file's actual size can increase the file's size
+//	* If the mapped file is being modified by another process while your program's running, don't expect consistent results between platforms
+
+--- mmap_unix.go ---
+// Copyright 2011 Evan Shaw. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build darwin dragonfly freebsd linux openbsd solaris netbsd
+
+
+--- mmap_windows.go ---
+// Copyright 2011 Evan Shaw. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+

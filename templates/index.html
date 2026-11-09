@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0b0d10">
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+    <title>Leecher</title>
+    <link rel="preload" href="/static/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/static/fonts.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-csrf="<!--CSRF_TOKEN-->" data-admin="<!--IS_ADMIN-->" data-library="<!--LIBRARY-->" data-torrents="<!--TORRENTS-->" data-transmission="<!--TRANSMISSION-->" data-direct="<!--DIRECT-->" data-library-path="<!--LIBRARY_PATH-->" data-file-age="<!--FILE_AGE-->" data-video-hosts="<!--VIDEO_HOSTS-->">
+    <a class="skip-link" href="#composer-input">Skip to link input</a>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="/" class="brand" aria-label="Leecher home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15a6 6 0 0 0 12 0 6 6 0 0 0-6-6V3"/><path d="M9 3h6"/></svg>
+                </span>
+                <span class="brand-name">Leecher</span>
+            </a>
+
+            <div class="sys" id="status" hidden>
+                <button type="button" class="status-pill" id="status-pill" aria-haspopup="dialog" aria-expanded="false" aria-controls="status-panel"></button>
+                <div class="status-panel" id="status-panel" role="dialog" aria-label="Server status" hidden>
+                    <section class="status-card" aria-labelledby="net-title">
+                        <header class="status-card-head">
+                            <h3 id="net-title">Network</h3>
+                            <button type="button" class="link-btn" id="net-recheck">Re-check</button>
+                        </header>
+                        <div id="net-body" aria-live="polite"></div>
+                    </section>
+                    <section class="status-card" id="disk-section" aria-labelledby="disk-title" hidden>
+                        <header class="status-card-head">
+                            <h3 id="disk-title">Storage</h3>
+                            <a class="link-btn" id="disk-admin" href="/admin#storage" hidden>Speed test &amp; details →</a>
+                        </header>
+                        <div id="disk-body"></div>
+                    </section>
+                </div>
+            </div>
+
+            <details class="menu">
+                <summary class="avatar" aria-label="Account menu for <!--USERNAME-->"><span id="avatar-initial" aria-hidden="true"></span></summary>
+                <div class="menu-panel" role="menu">
+                    <div class="menu-head">
+                        <strong><!--USERNAME--></strong>
+                        <span class="menu-role"><!--ROLE--></span>
+                    </div>
+                    <a href="/account" role="menuitem">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+                        Account &amp; API tokens
+                    </a>
+                    <a href="/admin" role="menuitem" id="menu-admin" hidden>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg>
+                        Admin
+                    </a>
+                    <button type="submit" form="logout-form" role="menuitem">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+                        Sign out
+                    </button>
+                </div>
+            </details>
+            <form id="logout-form" method="POST" action="/logout" hidden><input type="hidden" name="_csrf" value="<!--CSRF_TOKEN-->"></form>
+        </div>
+    </header>
+
+    <main class="page">
+        <!-- Composer -->
+        <section class="composer" aria-labelledby="composer-title">
+            <h1 id="composer-title" class="composer-title">What do you want to grab?</h1>
+            <p class="composer-sub" id="composer-sub">Paste a video link, a file URL or a magnet link.</p>
+
+            <form id="composer" class="composer-box" novalidate>
+                <label for="composer-input" class="sr-only">Link</label>
+                <span class="kind-badge" id="kind-badge" data-kind="none" aria-live="polite">
+                    <svg class="kind-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+                    <span class="kind-label" id="kind-label">Link</span>
+                </span>
+                <input id="composer-input" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://… or magnet:?xt=…" aria-describedby="composer-sub">
+                <div class="composer-actions">
+                    <button type="button" id="paste-btn" class="icon-btn" title="Paste from clipboard" aria-label="Paste from clipboard">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="8" height="4" rx="1"/><path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/></svg>
+                    </button>
+                    <button type="button" id="clear-btn" class="icon-btn" title="Clear" aria-label="Clear" hidden>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    </button>
+                    <button type="submit" id="fetch-btn" class="btn btn-primary">
+                        <span class="btn-label">Fetch</span>
+                        <span class="spinner" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="composer-foot">
+                <p class="sources" id="sources"><!--PLATFORMS--></p>
+                <button type="button" id="torrent-upload-btn" class="link-btn" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.5 12.5 21a5.5 5.5 0 0 1-8-8l9-9a3.7 3.7 0 0 1 5.2 5.2l-9 9a1.8 1.8 0 0 1-2.6-2.6l8.3-8.3"/></svg>
+                    Upload .torrent
+                </button>
+                <input type="file" id="torrent-file" accept=".torrent,application/x-bittorrent" hidden>
+            </div>
+
+            <div id="alert" class="alert" role="alert" hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+                <p id="alert-text"></p>
+                <button type="button" id="alert-close" class="icon-btn" aria-label="Dismiss"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+            </div>
+        </section>
+
+        <!-- Preview / options -->
+        <section id="preview" class="preview" aria-labelledby="preview-title" hidden>
+            <div class="preview-media">
+                <div class="thumb" id="thumb">
+                    <img id="thumb-img" alt="" decoding="async" hidden>
+                    <span class="thumb-ext" id="thumb-ext" hidden></span>
+                    <span class="thumb-duration" id="thumb-duration" hidden></span>
+                </div>
+                <div class="preview-meta">
+                    <h2 id="preview-title" class="preview-title"></h2>
+                    <p id="preview-sub" class="preview-sub"></p>
+                </div>
+            </div>
+
+            <fieldset class="field" id="quality-field" hidden>
+                <legend>Quality</legend>
+                <div class="chips" id="quality-chips" role="radiogroup" aria-label="Quality"></div>
+                <div class="select-wrap" id="more-formats-wrap" hidden>
+                    <label for="more-formats" class="sr-only">Other formats</label>
+                    <select id="more-formats"></select>
+                </div>
+            </fieldset>
+
+            <div class="preview-actions">
+                <button type="button" id="cancel-preview" class="btn btn-ghost">Cancel</button>
+                <button type="button" id="start-btn" class="btn btn-primary btn-lg">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                    <span class="btn-label" id="start-label">Download</span>
+                    <span class="spinner" aria-hidden="true"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Activity -->
+        <section class="activity" aria-labelledby="activity-title">
+            <div class="activity-head">
+                <h2 id="activity-title">Activity</h2>
+                <button type="button" id="clear-dead-btn" class="link-btn clear-dead" hidden title="Remove failed downloads and downloads whose file is gone from this list">Clear <span id="dead-count"></span></button>
+                <div class="tabs" role="tablist" aria-label="Filter activity" id="tabs">
+                    <button type="button" role="tab" aria-selected="true" data-filter="all">All <span class="count" id="count-all"></span></button>
+                    <button type="button" role="tab" aria-selected="false" data-filter="active">Active <span class="count" id="count-active"></span></button>
+                    <button type="button" role="tab" aria-selected="false" data-filter="torrent" id="tab-torrents" hidden>Torrents <span class="count" id="count-torrent"></span></button>
+                </div>
+            </div>
+            <ul class="activity-list" id="activity-list" aria-live="polite"></ul>
+            <div class="empty" id="activity-empty">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                <p class="empty-title">Nothing here yet</p>
+                <p class="empty-text">Downloads and torrents you start appear here. You can close the page — they keep running on the server.</p>
+                <a class="link-btn" href="/account">Bookmarklet &amp; magnet links →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>Leecher <!--APP_VERSION--></span>
+    </footer>
+
+    <div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+    <script src="/static/app.js" defer></script>
+</body>
+</html>

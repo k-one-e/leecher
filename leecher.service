@@ -1,0 +1,61 @@
+[Unit]
+Description=Leecher Media Downloader
+After=network.target
+
+[Service]
+Type=simple
+User=leecher
+Group=leecher
+WorkingDirectory=__INSTALL_DIR__
+ExecStart=__INSTALL_DIR__/leecher
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Resource caps — a runaway yt-dlp/ffmpeg gets OOM-killed instead of the host.
+MemoryMax=2G
+TasksMax=512
+CPUWeight=50
+
+# Filesystem: the install tree is root-owned and read-only. Only the paths the
+# service genuinely mutates are writable, so a compromised yt-dlp or ffmpeg
+# cannot rewrite the leecher binary itself.
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=__INSTALL_DIR__/downloads
+ReadWritePaths=__INSTALL_DIR__/.cache
+ReadWritePaths=__INSTALL_DIR__/.pyi-tmp
+ReadWritePaths=__INSTALL_DIR__/config.json
+# users.json and torrents.json (accounts, API token hashes, torrent owners).
+ReadWritePaths=__INSTALL_DIR__/state
+# bin/ must stay writable for the yt-dlp self-update (-U).
+ReadWritePaths=__INSTALL_DIR__/bin
+
+# Privileges
+NoNewPrivileges=true
+UMask=0027
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
+
+# Kernel / host surface
+PrivateDevices=true
+ProtectClock=true
+ProtectHostname=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectProc=invisible
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

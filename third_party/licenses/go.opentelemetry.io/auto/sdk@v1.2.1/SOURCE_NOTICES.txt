@@ -1,0 +1,88 @@
+--- doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package sdk provides an auto-instrumentable OpenTelemetry SDK.
+
+An [go.opentelemetry.io/auto.Instrumentation] can be configured to target the
+process running this SDK. In that case, all telemetry the SDK produces will be
+processed and handled by that [go.opentelemetry.io/auto.Instrumentation].
+
+By default, if there is no [go.opentelemetry.io/auto.Instrumentation] set to
+auto-instrument the SDK, the SDK will not generate any telemetry.
+*/
+
+--- internal/telemetry/attr.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package telemetry provides a lightweight representations of OpenTelemetry
+telemetry that is compatible with the OTLP JSON protobuf encoding.
+*/
+
+--- internal/telemetry/id.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/number.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/resource.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/scope.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/span.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/status.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/traces.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/telemetry/value.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- limit.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- span.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- tracer.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- tracer_provider.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+

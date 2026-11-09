@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0d10">
+<link rel="icon" type="image/svg+xml" href="/favicon.ico">
+<title>Sign in — Leecher</title>
+<link rel="preload" href="/static/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/fonts.css">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/auth.css">
+</head>
+<body class="auth-page">
+<main class="auth-card">
+  <div class="auth-brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15a6 6 0 0 0 12 0 6 6 0 0 0-6-6V3"/><path d="M9 3h6"/></svg>
+    </span>
+    <span class="brand-name">Leecher</span>
+  </div>
+  <h1>Welcome back</h1>
+  <p class="sub">Sign in to grab videos, files and torrents.</p>
+  <!--ERROR-->
+  <form method="POST" action="/login" autocomplete="on">
+    <input type="hidden" name="next" value="<!--NEXT-->">
+    <label class="label" for="username">Username</label>
+    <input class="input" type="text" id="username" name="username" autocomplete="username" autocapitalize="off" spellcheck="false" required autofocus>
+    <label class="label" for="password">Password</label>
+    <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
+    <button type="submit" class="btn btn-primary btn-lg">Sign in</button>
+  </form>
+  <p class="auth-foot">Forgot your password? Ask an admin to reset it.</p>
+</main>
+<footer class="footer">Leecher <!--APP_VERSION--></footer>
+</body>
+</html>

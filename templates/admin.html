@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.ico">
+<title>Admin — Leecher</title>
+<link rel="preload" href="/static/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/fonts.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  min-height:100vh;background:#050505;color:#e4e4e7;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2rem;background:rgba(10,10,10,.9);
+  border-bottom:1px solid rgba(0,255,135,.1);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:10;
+}
+.topbar-left{display:flex;align-items:center;gap:.75rem}
+.topbar-left svg{width:28px;height:28px;color:#00ff87}
+.topbar-title{font-size:1.1rem;font-weight:700;
+  background:linear-gradient(135deg,#10b981,#00ff87);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.topbar-right{display:flex;align-items:center;gap:1rem}
+.btn{
+  padding:.5rem 1rem;border-radius:8px;font-size:.82rem;font-weight:500;
+  cursor:pointer;transition:all .2s;font-family:inherit;border:none;
+  text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-ghost{background:transparent;color:#777;border:1px solid rgba(119,119,119,.2)}
+.btn-ghost:hover{color:#e4e4e7;border-color:rgba(119,119,119,.4);background:rgba(119,119,119,.06)}
+.btn-danger{background:rgba(255,68,68,.1);color:#ff4444;border:1px solid rgba(255,68,68,.2)}
+.btn-danger:hover{background:rgba(255,68,68,.18);border-color:rgba(255,68,68,.35)}
+.btn-sm{padding:.35rem .7rem;font-size:.78rem}
+
+.container{max-width:1100px;margin:0 auto;padding:2rem 2rem 0.5rem}
+
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;
+  margin-bottom:2rem;
+}
+.stat-card{
+  background:rgba(10,10,10,.7);border:1px solid rgba(0,255,135,.08);
+  border-radius:12px;padding:1.25rem;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.stat-label{font-size:.72rem;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem}
+.stat-value{font-size:1.5rem;font-weight:700;color:#e4e4e7}
+
+.panel{
+  background:rgba(10,10,10,.7);border:1px solid rgba(0,255,135,.08);
+  border-radius:14px;overflow:hidden;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.panel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.6rem;
+  padding:1.15rem 1.5rem;border-bottom:1px solid rgba(0,255,135,.06);
+}
+.panel-title{font-size:.95rem;font-weight:600;color:#e4e4e7;display:flex;align-items:center;gap:.5rem}
+.panel-title svg{width:18px;height:18px;color:#00ff87}
+.badge{
+  background:rgba(0,255,135,.12);color:#00ff87;font-size:.7rem;font-weight:600;
+  padding:.15rem .5rem;border-radius:20px;
+}
+
+/* Tables scroll inside their own box; without this the whole page scrolls
+   sideways on a phone. */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+thead th{
+  text-align:left;font-size:.72rem;font-weight:600;color:#555;
+  text-transform:uppercase;letter-spacing:.5px;
+  padding:.85rem 1.25rem;border-bottom:1px solid rgba(0,255,135,.06);
+}
+tbody td{
+  padding:.85rem 1.25rem;font-size:.85rem;color:#999;
+  border-bottom:1px solid rgba(20,20,20,.8);
+  vertical-align:middle;
+}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(0,255,135,.03)}
+tbody tr:last-child td{border-bottom:none}
+.file-name{
+  color:#e4e4e7;font-weight:500;word-break:break-all;
+  max-width:450px;display:inline-block;
+}
+.file-ext{
+  display:inline-block;padding:.1rem .4rem;border-radius:4px;
+  font-size:.7rem;font-weight:600;text-transform:uppercase;
+  background:rgba(0,255,135,.08);color:#00ff87;margin-left:.4rem;
+}
+.text-muted{color:#555}
+
+.empty{
+  text-align:center;padding:3rem 1rem;color:#444;
+}
+.empty svg{width:48px;height:48px;margin-bottom:1rem;opacity:.4}
+.empty p{font-size:.9rem}
+
+/* Settings */
+.settings-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:0;
+}
+.setting-group{
+  padding:1.15rem 1.5rem;
+  border-bottom:1px solid rgba(0,255,135,.04);
+  transition:background .15s;
+}
+.setting-group:hover{background:rgba(0,255,135,.02)}
+.setting-label{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.82rem;font-weight:600;color:#e4e4e7;margin-bottom:.2rem;
+}
+.setting-unit{
+  font-size:.68rem;font-weight:500;color:#555;
+  background:rgba(0,255,135,.06);padding:.1rem .4rem;border-radius:4px;
+}
+.setting-desc{
+  font-size:.72rem;color:#555;margin-bottom:.55rem;line-height:1.35;
+}
+.setting-input{
+  width:100%;max-width:160px;padding:.45rem .65rem;
+  background:rgba(0,255,135,.03);border:1px solid rgba(0,255,135,.12);
+  border-radius:8px;color:#e4e4e7;font-size:.85rem;font-family:inherit;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  -moz-appearance:textfield;
+}
+.setting-input::-webkit-outer-spin-button,
+.setting-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.setting-input:focus{border-color:#00ff87;box-shadow:0 0 0 3px rgba(0,255,135,.08)}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle .slider{position:absolute;inset:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:12px;cursor:pointer;transition:all .25s}
+.toggle .slider::before{content:'';position:absolute;width:18px;height:18px;left:2px;top:2px;background:#555;border-radius:50%;transition:all .25s}
+.toggle input:checked+.slider{background:rgba(0,255,135,.15);border-color:rgba(0,255,135,.3)}
+.toggle input:checked+.slider::before{transform:translateX(20px);background:#00ff87;box-shadow:0 0 8px rgba(0,255,135,.4)}
+.settings-status{
+  font-size:.75rem;font-weight:500;transition:opacity .3s;
+}
+.settings-status.ok{color:#00ff87}
+.settings-status.err{color:#ff4444}
+.ks-group{grid-column:1/-1}
+.ks-fields{display:flex;gap:1.5rem;flex-wrap:wrap}
+.ks-fields > div:first-child{flex:1 1 280px}
+.setting-input.ks-ips{max-width:420px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;line-height:1.5}
+.ks-live{margin:.7rem 0 0}
+.ks-live.tripped{color:#ff4444}
+.ks-live.ok{color:#00ff87}
+
+.btn.needs-save{color:#f59e0b;border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.08)}
+
+/* Pinned so an unsaved change is always one tap away, however far the settings
+   list has been scrolled. */
+.save-bar{
+  position:fixed;left:50%;bottom:1rem;transform:translate(-50%,150%);
+  display:flex;align-items:center;gap:.85rem;
+  padding:.6rem .7rem .6rem 1rem;
+  background:rgba(10,10,10,.96);border:1px solid rgba(245,158,11,.35);
+  border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5);
+  font-size:.8rem;color:#f59e0b;font-weight:500;
+  opacity:0;pointer-events:none;transition:transform .25s,opacity .25s;
+  z-index:50;max-width:calc(100vw - 2rem);
+}
+.save-bar.visible{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+
+.cookies-health{
+  display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.65rem;
+}
+.cookies-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.2rem .55rem;font-size:.7rem;font-weight:500;
+  border-radius:100px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.02);color:#8a8a8f;
+}
+.cookies-chip.ok{color:#00ff87;border-color:rgba(0,255,135,.25);background:rgba(0,255,135,.05)}
+.cookies-chip.warn{color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06)}
+.cookies-chip.err{color:#ff4444;border-color:rgba(255,68,68,.3);background:rgba(255,68,68,.06)}
+.cookies-chip .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.cookies-authwarn{
+  margin-top:.65rem;padding:.55rem .75rem;
+  font-size:.72rem;line-height:1.5;
+  color:#f59e0b;
+  background:rgba(245,158,11,.05);
+  border:1px solid rgba(245,158,11,.2);
+  border-radius:8px;
+}
+
+.disk-list{padding:.5rem 1.5rem}
+.disk-empty{padding:1rem 0;color:#555;font-size:.85rem}
+.disk-row{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.disk-row:last-child{border-bottom:0}
+.disk-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.55rem}
+.disk-name{font-weight:600;color:#e4e4e7;font-size:.9rem;display:flex;align-items:center;gap:.5rem}
+.disk-dev{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.7rem;color:#777;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.05rem .4rem}
+.disk-free-big{font-size:.85rem;color:#a1a1aa;font-variant-numeric:tabular-nums}
+.disk-free-big strong{color:#e4e4e7;font-size:1rem}
+.disk-paths{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:#555;margin-bottom:.6rem;word-break:break-all}
+.disk-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden}
+.disk-bar>span{display:block;height:100%;background:#00ff87;border-radius:inherit;transition:width .4s}
+.disk-row.low .disk-bar>span{background:#f59e0b}
+.disk-row.low .disk-free-big strong{color:#f59e0b}
+.disk-meta{display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;align-items:center;margin-top:.7rem;font-size:.78rem;color:#777;font-variant-numeric:tabular-nums}
+.disk-meta b{color:#e4e4e7;font-weight:600}
+.disk-meta .io-r b{color:#7cb4ff}
+.disk-meta .io-w b{color:#00ff87}
+.disk-bench{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.disk-bench-result{color:#a1a1aa}
+.disk-bench-result.err{color:#ff4444}
+.disk-err{color:#ff4444;font-size:.8rem}
+.disk-note{padding:0 1.5rem 1rem;font-size:.72rem;color:#555;line-height:1.5}
+
+.confirm-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+  z-index:100;backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.confirm-overlay.active{opacity:1;pointer-events:auto}
+.confirm-box{
+  background:#0a0a0a;border:1px solid rgba(255,68,68,.2);
+  border-radius:14px;padding:1.75rem;max-width:380px;width:90%;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);
+}
+.confirm-box h3{font-size:1rem;color:#e4e4e7;margin-bottom:.5rem}
+.confirm-box p{font-size:.85rem;color:#777;margin-bottom:1.25rem;line-height:1.5}
+.confirm-box .fname{color:#ff4444;font-weight:500;word-break:break-all}
+.confirm-actions{display:flex;gap:.75rem;justify-content:flex-end}
+
+@media(max-width:700px){
+  .topbar{padding:.75rem 1rem;flex-wrap:wrap;gap:.5rem}
+  .topbar-title{font-size:1rem}
+  .topbar-right{gap:.5rem;flex-wrap:wrap}
+  .container{padding:1.25rem 1rem .5rem}
+  .stats{grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+  .stat-card{padding:1rem}
+  .stat-value{font-size:1.25rem}
+  .panel-header{padding:.9rem 1rem}
+  .setting-group{padding:.9rem 1rem}
+  thead th,tbody td{padding:.7rem .85rem}
+  table{min-width:460px}
+  .file-name{max-width:200px}
+  .btn{padding:.45rem .75rem}
+}
+@media(max-width:400px){
+  .stats{grid-template-columns:1fr}
+}
+.admin-footer{
+  text-align:center;padding:0.35rem 0 0;margin-top:0.75rem;
+  font-size:.68rem;font-weight:500;color:#555;
+}
+.admin-footer a{color:#555;text-decoration:none;transition:color .2s}
+.admin-footer a:hover{color:#00ff87}
+</style>
+</head>
+<body data-csrf="<!--CSRF_TOKEN-->" data-defaults="<!--DEFAULTS_JSON-->">
+
+<div class="topbar">
+  <div class="topbar-left">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+      <rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    <span class="topbar-title">Admin Panel</span>
+  </div>
+  <div class="topbar-right">
+    <a href="/" class="btn btn-ghost">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Leecher
+    </a>
+    <a href="/account" class="btn btn-ghost">Account</a>
+    <form method="POST" action="/logout" style="margin:0">
+      <input type="hidden" name="_csrf" value="<!--CSRF_TOKEN-->">
+      <button type="submit" class="btn btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-label">Total Files</div>
+      <div class="stat-value" id="totalFiles">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Size</div>
+      <div class="stat-value" id="totalSize">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Free Space</div>
+      <div class="stat-value" id="diskUsage">—</div>
+    </div>
+  </div>
+
+  <!-- Storage Panel -->
+  <div class="panel" id="storage" style="margin-bottom:1.5rem">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>
+        </svg>
+        Storage
+      </div>
+      <span class="setting-desc" style="margin:0">Live speeds refresh every 3s</span>
+    </div>
+    <div id="diskList" class="disk-list">
+      <p class="disk-empty">Loading…</p>
+    </div>
+    <p class="disk-note">The speed test writes and reads back a 256&nbsp;MB file, then deletes it. Running downloads share the disk and lower the result.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        Downloaded Files
+        <span class="badge" id="fileBadge">0</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="refreshFilesBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+        Refresh
+      </button>
+    </div>
+
+    <div id="tableWrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Size</th>
+            <th>Date</th>
+            <th style="width:100px;text-align:right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="fileBody">
+          <tr><td colspan="4" class="empty">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p>Loading files...</p>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Settings Panel -->
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+        </svg>
+        Settings
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <span class="settings-status" id="settingsStatus"></span>
+        <button class="btn btn-ghost btn-sm" id="saveSettingsBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
+      </div>
+    </div>
+    <div class="settings-grid" id="settingsGrid">
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_file_age_minutes">Unkept Download Expiry<span class="setting-unit">minutes</span></label>
+        <p class="setting-desc">Finished downloads nobody pressed &ldquo;Keep&rdquo; on are deleted after this long (1440 = 1 day). Kept files are never deleted automatically.</p>
+        <input type="number" class="setting-input" id="s_max_file_age_minutes" min="1">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_download_timeout_minutes">Download Timeout<span class="setting-unit">minutes</span></label>
+        <p class="setting-desc">Cancel downloads that take longer than this</p>
+        <input type="number" class="setting-input" id="s_download_timeout_minutes" min="1">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_concurrent_downloads">Max Concurrent Downloads<span class="setting-unit">1-10</span></label>
+        <p class="setting-desc">How many downloads can run at the same time (across all users)</p>
+        <input type="number" class="setting-input" id="s_max_concurrent_downloads" min="1" max="10">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_downloads_per_ip">Max Downloads Per User<span class="setting-unit">1-10</span></label>
+        <p class="setting-desc">How many active downloads one account can have at once; extras queue automatically</p>
+        <input type="number" class="setting-input" id="s_max_downloads_per_ip" min="1" max="10">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_file_size_mb">Max File Size<span class="setting-unit">MB, 0 = no limit</span></label>
+        <p class="setting-desc">Reject individual files larger than this</p>
+        <input type="number" class="setting-input" id="s_max_file_size_mb" min="0">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_storage_mb">Max Unkept Storage<span class="setting-unit">MB, 0 = no limit</span></label>
+        <p class="setting-desc">Cap for downloads that were not kept; the oldest are deleted first. Kept files don't count.</p>
+        <input type="number" class="setting-input" id="s_max_storage_mb" min="0">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_min_disk_free_mb">Min Free Disk Space<span class="setting-unit">MB</span></label>
+        <p class="setting-desc">Refuse downloads if disk free space drops below this</p>
+        <input type="number" class="setting-input" id="s_min_disk_free_mb" min="0">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_session_hours">Session Duration<span class="setting-unit">hours</span></label>
+        <p class="setting-desc">How long sign-in sessions stay active</p>
+        <input type="number" class="setting-input" id="s_session_hours" min="1">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_rate_limit_formats">Rate Limit: Formats<span class="setting-unit">req/min/user</span></label>
+        <p class="setting-desc">Max format probes per minute per user</p>
+        <input type="number" class="setting-input" id="s_rate_limit_formats" min="1" max="60">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_rate_limit_downloads">Rate Limit: Downloads<span class="setting-unit">req/min/user</span></label>
+        <p class="setting-desc">Max download requests per minute per user</p>
+        <input type="number" class="setting-input" id="s_rate_limit_downloads" min="1" max="60">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_probe_concurrency">Probe Concurrency<span class="setting-unit">1-20</span></label>
+        <p class="setting-desc">Max simultaneous yt-dlp format probes running at once</p>
+        <input type="number" class="setting-input" id="s_probe_concurrency" min="1" max="20">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_probe_queue_max">Probe Queue Max<span class="setting-unit">1-500</span></label>
+        <p class="setting-desc">Max total requests waiting + active before rejecting new ones</p>
+        <input type="number" class="setting-input" id="s_probe_queue_max" min="1" max="500">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_probe_timeout_secs">Probe Timeout<span class="setting-unit">5-600 sec</span></label>
+        <p class="setting-desc">Max seconds a format-probe request will wait in queue + run before timing out</p>
+        <input type="number" class="setting-input" id="s_probe_timeout_secs" min="5" max="600">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_download_queue_max">Download Queue Max<span class="setting-unit">1-200</span></label>
+        <p class="setting-desc">Max total download requests queued + active; excess are rejected with 503</p>
+        <input type="number" class="setting-input" id="s_download_queue_max" min="1" max="200">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_library_dir">Server Library Folder<span class="setting-unit">path, empty = off</span></label>
+        <p class="setting-desc">Where kept downloads are stored. All downloads first land in a hidden <code>.leecher</code> folder inside it, so they use this drive's space; &ldquo;Keep&rdquo; then moves them in instantly. Absolute server path (e.g. /srv/media), writable by leecher. Empty = no Keep, downloads use the small temporary folder.</p>
+        <input type="text" class="setting-input" id="s_library_dir" placeholder="/srv/media/leecher" spellcheck="false">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_direct_downloads">Direct File Downloads</label>
+        <p class="setting-desc">Allow plain http(s) file links from sites yt-dlp doesn't handle. Private and local network addresses are always blocked.</p>
+        <div style="display:inline-flex;align-items:center;gap:.6rem">
+          <label class="toggle">
+            <input type="checkbox" id="s_direct_downloads">
+            <span class="slider"></span>
+          </label>
+          <span style="font-size:.8rem;color:#8a8a92;font-weight:500" id="direct_downloads_label">Off</span>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_direct_timeout_minutes">Direct Download Timeout<span class="setting-unit">1-1440 min</span></label>
+        <p class="setting-desc">Cancel direct file downloads that take longer than this (large files need more time than videos)</p>
+        <input type="number" class="setting-input" id="s_direct_timeout_minutes" min="1" max="1440">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_torrent_engine">Torrent Engine</label>
+        <p class="setting-desc">Built-in runs torrents inside Leecher like any other download (Save / Keep / Delete). Transmission hands them to an external Transmission server instead.</p>
+        <select class="setting-input" id="s_torrent_engine">
+          <option value="builtin">Built-in</option>
+          <option value="transmission">Transmission (external)</option>
+          <option value="off">Off — no torrents</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_seed_ratio">Seed Until Ratio<span class="setting-unit">0 = no ratio limit</span></label>
+        <p class="setting-desc">Built-in engine: keep sharing a finished torrent until it has uploaded this many times its size (1 = as much as it downloaded).</p>
+        <input type="number" class="setting-input" id="s_seed_ratio" min="0" max="100" step="0.1">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_seed_minutes">Seed At Most<span class="setting-unit">minutes, 0 = no seeding</span></label>
+        <p class="setting-desc">Seeding also stops after this long, or as soon as the user presses Keep or Delete.</p>
+        <input type="number" class="setting-input" id="s_seed_minutes" min="0">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_max_active_torrents">Max Active Torrents<span class="setting-unit">0 = unlimited</span></label>
+        <p class="setting-desc">How many torrents may download at the same time across all users.</p>
+        <input type="number" class="setting-input" id="s_max_active_torrents" min="0" max="50">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_transmission_url">Transmission RPC URL<span class="setting-unit">empty = no torrents</span></label>
+        <p class="setting-desc">Magnet links and .torrent files are handed to this Transmission instance. Credentials come from TRANSMISSION_USER / TRANSMISSION_PASS.</p>
+        <input type="text" class="setting-input" id="s_transmission_url" placeholder="http://localhost:9091/transmission/rpc" spellcheck="false">
+        <div style="display:flex;gap:.5rem;align-items:center;margin-top:.5rem">
+          <button class="btn btn-ghost btn-sm" type="button" id="testTransmissionBtn">Test saved connection</button>
+          <span class="settings-status" id="transmissionStatus"></span>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_transmission_download_dir">Torrent Download Folder<span class="setting-unit">empty = Transmission default</span></label>
+        <p class="setting-desc">Absolute path <em>inside the Transmission container</em> where new torrents are saved (e.g. /downloads/complete)</p>
+        <input type="text" class="setting-input" id="s_transmission_download_dir" placeholder="/downloads/complete" spellcheck="false">
+      </div>
+      <div class="setting-group ks-group">
+        <label class="setting-label" for="s_kill_switch">Kill Switch<span class="setting-unit" id="ksState">off</span></label>
+        <p class="setting-desc">Stops every download as soon as Leecher's outbound IP is not one of the allowed addresses &mdash; e.g. when the VPN drops. Videos and direct downloads are cancelled, built-in torrents pause (the torrent engine shuts down completely), running Transmission torrents are stopped, and nothing new can start. When an allowed IP is back, paused torrents resume on their own. If the IP cannot be determined at all, it trips too.</p>
+        <div style="display:inline-flex;align-items:center;gap:.6rem">
+          <label class="toggle">
+            <input type="checkbox" id="s_kill_switch">
+            <span class="slider"></span>
+          </label>
+          <span style="font-size:.8rem;color:#8a8a92;font-weight:500" id="kill_switch_label">Off</span>
+        </div>
+        <div class="ks-fields">
+          <div>
+            <label class="setting-label" for="s_kill_switch_ips" style="margin-top:.8rem">Allowed outbound IPs<span class="setting-unit">one per line, IP or CIDR</span></label>
+            <textarea class="setting-input ks-ips" id="s_kill_switch_ips" rows="3" spellcheck="false" placeholder="212.104.214.18&#10;194.126.177.0/24"></textarea>
+            <div style="display:flex;gap:.5rem;align-items:center;margin-top:.5rem;flex-wrap:wrap">
+              <button class="btn btn-ghost btn-sm" type="button" id="ksDetectBtn">Detect current IP</button>
+              <span class="settings-status" id="ksDetectStatus"></span>
+            </div>
+          </div>
+          <div>
+            <label class="setting-label" for="s_kill_switch_interval_secs" style="margin-top:.8rem">Check every<span class="setting-unit">1-300 sec</span></label>
+            <input type="number" class="setting-input" id="s_kill_switch_interval_secs" min="1" max="300">
+          </div>
+        </div>
+        <p class="setting-desc ks-live" id="ksLive"></p>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_time_zone">Time Zone<span class="setting-unit">IANA</span></label>
+        <p class="setting-desc">Timezone for displayed timestamps (e.g. Europe/Berlin)</p>
+        <input type="text" class="setting-input" id="s_time_zone">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label">Cookies File<span class="setting-unit" id="cookiesStatus">none</span></label>
+        <p class="setting-desc">Upload one Netscape cookies.txt covering any platforms you want authenticated &mdash; YouTube (bypasses captcha walls and unlocks 4K), Instagram, X, Facebook, TikTok, Reddit. Export with the &ldquo;Get cookies.txt LOCALLY&rdquo; browser extension while logged in. The status chips below show which platforms were detected.</p>
+        <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+          <input type="file" id="cookiesFileInput" accept=".txt" style="display:none">
+          <button class="btn btn-ghost btn-sm" type="button" id="pickCookiesBtn">Upload cookies.txt</button>
+          <button class="btn btn-ghost btn-sm" type="button" id="clearCookiesBtn" style="display:none">Clear</button>
+          <button class="btn btn-ghost btn-sm" type="button" id="refreshCookiesBtn" style="display:none">Refresh</button>
+          <span class="settings-status" id="cookiesUploadStatus"></span>
+        </div>
+        <div id="cookiesHealth" class="cookies-health" style="display:none"></div>
+        <div id="cookiesAuthWarn" class="cookies-authwarn" style="display:none"></div>
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="s_debug_mode">Debug Mode</label>
+        <p class="setting-desc">Show yt-dlp log output on the download page</p>
+        <div style="display:inline-flex;align-items:center;gap:.6rem">
+          <label class="toggle">
+            <input type="checkbox" id="s_debug_mode">
+            <span class="slider"></span>
+          </label>
+          <span style="font-size:.8rem;color:#8a8a92;font-weight:500" id="debug_mode_label">Off</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Panel -->
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        Users
+        <span class="badge" id="userBadge">0</span>
+      </div>
+      <span class="settings-status" id="userStatus"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Tokens</th>
+            <th>Created</th>
+            <th style="text-align:right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userBody">
+          <tr><td colspan="5" class="empty"><p>Loading...</p></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="settings-grid" style="border-top:1px solid rgba(0,255,135,.06)">
+      <div class="setting-group">
+        <label class="setting-label" for="nu_username">New User</label>
+        <p class="setting-desc">Letters, digits and . _ @ -</p>
+        <input type="text" class="setting-input" id="nu_username" autocomplete="off" maxlength="64">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="nu_password">Initial Password<span class="setting-unit">min. 8</span></label>
+        <p class="setting-desc">They will be asked to change it on first sign-in</p>
+        <input type="password" class="setting-input" id="nu_password" autocomplete="new-password" minlength="8">
+      </div>
+      <div class="setting-group">
+        <label class="setting-label" for="nu_role">Role</label>
+        <p class="setting-desc">Admins can change settings and manage users</p>
+        <select class="setting-input" id="nu_role"><option value="user">user</option><option value="admin">admin</option></select>
+        <button class="btn btn-ghost btn-sm" type="button" id="addUserBtn" style="margin-top:.6rem">Add user</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- yt-dlp Update Panel -->
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+          <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+        </svg>
+        yt-dlp
+        <span class="badge" id="ytdlpVersion">—</span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <span class="settings-status" id="updateStatus"></span>
+        <button class="btn btn-ghost btn-sm" id="updateYtdlpBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+          Update yt-dlp
+        </button>
+      </div>
+    </div>
+    <div id="ytdlpLogWrap" style="display:none;border-top:1px solid rgba(0,255,135,.06)">
+      <pre id="ytdlpLog" style="background:#0a0a0a;margin:0;padding:.85rem 1.25rem;font-size:.72rem;color:#888;max-height:200px;overflow-y:auto;white-space:pre-wrap;word-break:break-all;line-height:1.6"></pre>
+    </div>
+  </div>
+
+  <!-- History Panel -->
+  <div class="panel" style="margin-top:1.5rem">
+    <div class="panel-header">
+      <div class="panel-title">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        Download History
+        <span class="badge" id="historyBadge">0</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="refreshHistoryBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+        Refresh
+      </button>
+    </div>
+    <div id="historyWrap" class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th>Status</th>
+            <th>File</th>
+            <th>User</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <tr><td colspan="5" class="empty"><p>Loading...</p></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="admin-footer">Leecher <!--APP_VERSION--> &nbsp;&middot;&nbsp; Powered by <a href="https://github.com/k-one-e/" target="_blank" rel="noopener noreferrer">k-one-e</a></p>
+</div>
+
+<div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmDesc">
+  <div class="confirm-box">
+    <h3 id="confirmTitle">Delete File</h3>
+    <p id="confirmDesc">Are you sure you want to permanently delete<br><span class="fname" id="confirmName"></span>?</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost btn-sm" id="confirmCancelBtn">Cancel</button>
+      <button class="btn btn-danger btn-sm" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="save-bar" id="saveBar" role="status">
+  <span>Unsaved changes</span>
+  <button class="btn btn-ghost btn-sm" id="saveBarBtn">Save settings</button>
+</div>
+
+<script src="/static/admin.js" defer></script>
+</body>
+</html>

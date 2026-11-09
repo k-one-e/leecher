@@ -1,0 +1,52 @@
+--- cpuid.go ---
+// Copyright (c) 2015 Klaus Post, released under MIT License. See LICENSE file.
+
+// Package cpuid provides information about the CPU running the current program.
+//
+// CPU features are detected on startup, and kept for fast access through the life of the application.
+// Currently x86 / x64 (AMD64) as well as arm64 is supported.
+//
+// You can access the CPU information by accessing the shared CPU variable of the cpuid library.
+//
+// Package home: https://github.com/klauspost/cpuid
+
+--- detect_arm64.go ---
+// Copyright (c) 2015 Klaus Post, released under MIT License. See LICENSE file.
+
+//go:build arm64 && !gccgo && !noasm && !appengine
+// +build arm64,!gccgo,!noasm,!appengine
+
+
+--- detect_ref.go ---
+// Copyright (c) 2015 Klaus Post, released under MIT License. See LICENSE file.
+
+//go:build (!amd64 && !386 && !arm64) || gccgo || noasm || appengine
+// +build !amd64,!386,!arm64 gccgo noasm appengine
+
+
+--- detect_x86.go ---
+// Copyright (c) 2015 Klaus Post, released under MIT License. See LICENSE file.
+
+//go:build (386 && !gccgo && !noasm && !appengine) || (amd64 && !gccgo && !noasm && !appengine)
+// +build 386,!gccgo,!noasm,!appengine amd64,!gccgo,!noasm,!appengine
+
+
+--- os_darwin_arm64.go ---
+// Copyright (c) 2020 Klaus Post, released under MIT License. See LICENSE file.
+
+
+--- os_linux_arm64.go ---
+// Copyright (c) 2020 Klaus Post, released under MIT License. See LICENSE file.
+
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file located
+// here https://github.com/golang/sys/blob/master/LICENSE
+
+
+--- os_unsafe_linux_arm64.go ---
+// Copyright (c) 2021 Klaus Post, released under MIT License. See LICENSE file.
+
+//go:build !nounsafe
+// +build !nounsafe
+

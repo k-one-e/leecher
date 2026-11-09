@@ -1,0 +1,18 @@
+--- errgroup/errgroup.go ---
+// Copyright 2016 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package errgroup provides synchronization, error propagation, and Context
+// cancellation for groups of goroutines working on subtasks of a common task.
+//
+// [errgroup.Group] is related to [sync.WaitGroup] but adds handling of tasks
+// returning errors.
+
+--- singleflight/singleflight.go ---
+// Copyright 2013 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package singleflight provides a duplicate function call suppression
+// mechanism.

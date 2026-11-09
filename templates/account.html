@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0b0d10">
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+    <title>Account — Leecher</title>
+    <link rel="stylesheet" href="/static/fonts.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/account.css">
+</head>
+<body data-csrf="<!--CSRF_TOKEN-->">
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="/" class="brand" aria-label="Back to Leecher">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15a6 6 0 0 0 12 0 6 6 0 0 0-6-6V3"/><path d="M9 3h6"/></svg>
+                </span>
+                <span class="brand-name">Leecher</span>
+            </a>
+            <a href="/" class="btn btn-ghost btn-sm">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                <span>Back</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page">
+        <h1 class="composer-title">Account</h1>
+        <p class="composer-sub" id="acct-who">&nbsp;</p>
+
+        <section class="card" aria-labelledby="pw-title">
+            <h2 class="card-title" id="pw-title">Password</h2>
+            <form id="pw-form" class="acct-form">
+                <label class="label" for="pw-current">Current password</label>
+                <input class="input" type="password" id="pw-current" autocomplete="current-password" required>
+                <div class="acct-grid">
+                    <div>
+                        <label class="label" for="pw-new">New password</label>
+                        <input class="input" type="password" id="pw-new" autocomplete="new-password" minlength="8" required aria-describedby="pw-hint">
+                    </div>
+                    <div>
+                        <label class="label" for="pw-confirm">Repeat new password</label>
+                        <input class="input" type="password" id="pw-confirm" autocomplete="new-password" minlength="8" required>
+                    </div>
+                </div>
+                <p class="acct-hint" id="pw-hint">At least 8 characters. Other signed-in devices are signed out after the change.</p>
+                <div class="acct-row">
+                    <button type="submit" class="btn btn-primary">Update password</button>
+                    <span class="acct-status" id="pw-status" role="status"></span>
+                </div>
+            </form>
+        </section>
+
+        <section class="card" aria-labelledby="tok-title">
+            <h2 class="card-title" id="tok-title">API tokens</h2>
+            <p class="card-sub">For scripts, phone shortcuts and other tools. A token can start and follow downloads and manage your torrents — never settings or accounts.</p>
+            <form id="tok-form" class="acct-inline">
+                <label for="tok-name" class="sr-only">Token name</label>
+                <input class="input" type="text" id="tok-name" placeholder="Name, e.g. iPhone shortcut" maxlength="64" required>
+                <button type="submit" class="btn btn-primary">Create token</button>
+            </form>
+            <div id="tok-new" class="acct-newtoken" role="status" hidden>
+                <p><strong>Copy your new token now.</strong> It won’t be shown again.</p>
+                <div class="acct-inline">
+                    <code id="tok-value"></code>
+                    <button type="button" id="tok-copy" class="btn btn-ghost btn-sm">Copy</button>
+                </div>
+            </div>
+            <div id="tok-list" class="acct-list"></div>
+            <details class="acct-details">
+                <summary>How to use a token</summary>
+                <pre id="tok-example"></pre>
+            </details>
+        </section>
+
+        <section class="card" aria-labelledby="mg-title">
+            <h2 class="card-title" id="mg-title">Magnet links</h2>
+            <p class="card-sub">Make Leecher your browser’s app for <code>magnet:</code> links. Clicking a magnet link on any website then opens it here, ready to add to Transmission.</p>
+            <div class="acct-row">
+                <button type="button" id="magnet-btn" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M6 7h4M14 7h4"/></svg>
+                    <span>Open magnet links with Leecher</span>
+                </button>
+                <span class="acct-status" id="magnet-status" role="status"></span>
+            </div>
+            <p class="acct-hint">Works in Chrome, Edge, Brave and Firefox. Do it once per browser and device; the browser asks you to confirm. Safari doesn’t support this — use the bookmarklet or paste the link instead.</p>
+        </section>
+
+        <section class="card" aria-labelledby="bm-title">
+            <h2 class="card-title" id="bm-title">Bookmarklet</h2>
+            <p class="card-sub">Drag the button to your bookmarks bar. Click it on any page to open that page in Leecher.</p>
+            <a id="bookmarklet" class="btn btn-ghost acct-bm" href="#">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+                <span>Send to Leecher</span>
+            </a>
+        </section>
+    </main>
+
+    <footer class="footer"><span>Leecher <!--APP_VERSION--></span></footer>
+    <script src="/static/account.js" defer></script>
+</body>
+</html>

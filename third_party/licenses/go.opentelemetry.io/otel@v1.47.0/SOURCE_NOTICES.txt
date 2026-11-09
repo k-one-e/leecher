@@ -1,0 +1,340 @@
+--- attribute/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package attribute provides key and value attributes.
+
+--- attribute/encoder.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/filter.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/hash.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/internal/attribute.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package attribute provide several helper functions for some commonly used
+logic of processing attributes.
+*/
+
+--- attribute/internal/xxhash/xxhash.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package xxhash provides a wrapper around the xxhash library for attribute hashing.
+
+--- attribute/iterator.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/key.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/kv.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/rawhelpers.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/set.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- attribute/value.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- baggage/baggage.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- baggage/context.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- baggage/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package baggage provides functionality for storing and retrieving
+baggage items in Go context. For propagating the baggage, see the
+go.opentelemetry.io/otel/propagation package.
+*/
+
+--- codes/codes.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- codes/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package codes defines the canonical error codes used by OpenTelemetry.
+
+It conforms to [the OpenTelemetry
+specification](https://github.com/open-telemetry/opentelemetry-specification/blob/v1.20.0/specification/trace/api.md#set-status).
+*/
+
+--- doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package otel provides global access to the OpenTelemetry API. The subpackages of
+the otel package provide an implementation of the OpenTelemetry API.
+
+The provided API is used to instrument code and measure data about that code's
+performance and operation. The measured data, by default, is not processed or
+transmitted anywhere. An implementation of the OpenTelemetry SDK, like the
+default SDK implementation (go.opentelemetry.io/otel/sdk), and associated
+exporters are used to process and transport this data.
+
+To read the getting started guide, see https://opentelemetry.io/docs/languages/go/getting-started/.
+
+To read more about tracing, see go.opentelemetry.io/otel/trace.
+
+To read more about metrics, see go.opentelemetry.io/otel/metric.
+
+To read more about logs, see go.opentelemetry.io/otel/log.
+
+To read more about propagation, see go.opentelemetry.io/otel/propagation and
+go.opentelemetry.io/otel/baggage.
+*/
+
+--- error_handler.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- handler.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/baggage/baggage.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package baggage provides base types and functionality to store and retrieve
+baggage in Go context. This package exists because the OpenTracing bridge to
+OpenTelemetry needs to synchronize state whenever baggage for a context is
+modified and that context contains an OpenTracing span. If it were not for
+this need this package would not need to exist and the
+`go.opentelemetry.io/otel/baggage` package would be the singular place where
+W3C baggage is handled.
+*/
+
+--- internal/baggage/context.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/errorhandler/errorhandler.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package errorhandler provides the global error handler for OpenTelemetry.
+//
+// This package has no OTel dependencies, allowing it to be imported by any
+// package in the module without creating import cycles.
+
+--- internal/global/handler.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package global provides the OpenTelemetry global API.
+
+--- internal/global/instruments.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/internal_logging.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/logger.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/meter.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/propagator.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/state.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal/global/trace.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- internal_logging.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- log.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- metric.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- propagation.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- propagation/baggage.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- propagation/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+/*
+Package propagation contains OpenTelemetry context propagators.
+
+OpenTelemetry propagators are used to extract and inject context data from and
+into messages exchanged by applications. The propagator supported by this
+
+--- propagation/internal/hextable/hextable.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package hextable provides a lookup table for decoding lowercase
+// hexadecimal.
+
+--- propagation/propagation.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- propagation/trace_context.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.37.0/attribute_group.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+
+--- semconv/v1.37.0/doc.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package semconv implements OpenTelemetry semantic conventions.
+//
+// OpenTelemetry semantic conventions are agreed standardized naming
+// patterns for OpenTelemetry things. This package represents the v1.37.0
+// version of the OpenTelemetry semantic conventions.
+
+--- semconv/v1.37.0/error_type.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.37.0/exception.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.37.0/schema.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.43.0/attribute_group.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+
+--- semconv/v1.43.0/doc.go ---
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+// Package semconv implements OpenTelemetry semantic conventions.
+//
+// OpenTelemetry semantic conventions are agreed standardized naming
+// patterns for OpenTelemetry things. This package represents the v1.43.0
+// version of the OpenTelemetry semantic conventions.
+
+--- semconv/v1.43.0/error_type.go ---
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.43.0/exception.go ---
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- semconv/v1.43.0/schema.go ---
+// Code generated from semantic convention specification. DO NOT EDIT.
+
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- trace.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+
+
+--- version.go ---
+// Copyright The OpenTelemetry Authors
+// SPDX-License-Identifier: Apache-2.0
+

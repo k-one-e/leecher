@@ -1,0 +1,16 @@
+.git
+dist
+release
+downloads
+test_downloads
+state
+bin
+.cache
+leecher
+loot
+downloader
+config.json
+*cookies.txt
+*.md
+!LEGAL.md
+!THIRD_PARTY_NOTICES.md

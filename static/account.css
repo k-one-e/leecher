@@ -1,0 +1,23 @@
+.acct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 .75rem; }
+.acct-hint { margin-top: .5rem; font-size: .78rem; color: var(--text-3); }
+.acct-row, .acct-inline { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; margin-top: 1rem; }
+.acct-inline .input { flex: 1; min-width: 200px; }
+.acct-status { font-size: .84rem; color: var(--accent); }
+.acct-status.err { color: var(--danger); }
+.acct-text { font-size: .86rem; color: var(--text-3); }
+.acct-newtoken { margin-top: 1rem; padding: .85rem 1rem; border-radius: var(--radius); border: 1px solid var(--accent-line); background: var(--accent-soft); font-size: .86rem; }
+.acct-newtoken .acct-inline { margin-top: .5rem; }
+.acct-newtoken code { flex: 1; min-width: 0; overflow-wrap: anywhere; font: .8rem var(--mono); color: var(--accent); }
+.acct-list { margin-top: 1rem; display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+.acct-item { display: flex; align-items: center; gap: .75rem; padding: .75rem 0; border-bottom: 1px solid var(--border); font-size: .88rem; }
+.acct-item .grow { flex: 1; min-width: 0; }
+.acct-item .grow > div:first-child { font-weight: 600; }
+.acct-item .meta { color: var(--text-3); font-size: .78rem; margin-top: .1rem; }
+.acct-list > .acct-text { padding: .9rem 0 .2rem; }
+.acct-details { margin-top: 1rem; font-size: .84rem; color: var(--text-2); }
+.acct-details summary { cursor: pointer; }
+.acct-details pre { margin-top: .6rem; padding: .8rem .9rem; border-radius: var(--radius-sm); background: var(--bg); border: 1px solid var(--border); white-space: pre-wrap; word-break: break-all; font: .76rem/1.6 var(--mono); color: var(--text-2); }
+.acct-bm { margin-top: 1rem; cursor: grab; }
+.card-sub code { font: .82rem var(--mono); color: var(--text); }
+.page > .card:first-of-type { margin-top: 1.5rem; }
+@media (max-width: 640px) { .acct-grid { grid-template-columns: 1fr; } }

@@ -2,6 +2,11 @@
 
 Lightweight, self-hosted downloader with a web UI — videos, plain files and torrents in one place.
 
+**Open source under MIT. Download only content you are authorized to access and
+copy.** Software support for a service does not grant content rights or override
+its terms. Read the [copyright and legal-use guide](LEGAL.md) and
+[third-party notices](THIRD_PARTY_NOTICES.md) before use or redistribution.
+
 Paste a link from YouTube, Twitter, Instagram, TikTok, Reddit and dozens more, a direct file URL, or a magnet link — leecher picks the right engine. No cloud, no subscriptions — runs entirely on your own hardware, from a Raspberry Pi to a server or a container. Everything is behind a login with per-user accounts.
 
 ![Leecher screenshot](assets/screenshot.jpeg)
@@ -23,6 +28,7 @@ Paste a link from YouTube, Twitter, Instagram, TikTok, Reddit and dozens more, a
 - [Platform Requirements](#platform-requirements)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
+- [Copyright and legal use](LEGAL.md)
 
 ---
 
@@ -486,4 +492,19 @@ Check for port conflicts (`lsof -i :9090`) or config syntax errors.
 
 ## License
 
-Proprietary — free for personal and non-commercial use.
+[MIT](LICENSE) for Leecher's original code and documentation. Third-party
+components retain their own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).
+The software license does not grant rights to downloaded content.
+
+## Build from source
+
+```bash
+git clone https://github.com/k-one-e/leecher.git
+cd leecher
+go test ./...
+bash build.sh
+```
+
+Use a Go version satisfying `go.mod` (or Go's automatic toolchain selection).
+`bash build.sh all` builds all supported platforms. Release bundles include
+the software license, legal-use guide and third-party notices.
