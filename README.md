@@ -34,7 +34,7 @@ A single binary web server you run on any machine. Open the browser, paste a URL
 |-------|-------------|
 | **Main UI** | Paste a video link, file URL or magnet; pick a format; download to your device or save on the server |
 | **Torrents** | Magnets and `.torrent` files are handed to Transmission; each user sees and manages their own |
-| **Activity** | One list of your downloads and torrents with live progress, speed and ETA; stop, pause, resume or save from any device |
+| **Activity** | One list of your downloads and torrents with live progress, speed and ETA; stop, pause, resume, retry failed downloads or save from any device |
 | **Quality presets** | One-click Best quality, 1080p, and audio-only (MP3) |
 | **Accounts** | Every page needs a login; admin/user roles; personal API tokens for scripts |
 | **Admin panel** | Users, file manager, storage stats, runtime settings |
@@ -55,6 +55,7 @@ A single binary web server you run on any machine. Open the browser, paste a URL
 - **Status pill** — one compact pill in the top bar shows the public IP and flag leecher downloads from, free disk space and, while downloading, the live download speed (leecher's own network receive rate, averaged over 10 s); click it for a panel with location, provider, kill switch state and every disk's usage and read/write speed
 - **Kill switch** — optionally stop every download the moment the outbound IP is not one you allowed (e.g. the VPN dropped); torrents pause and resume automatically
 - **Save, Keep or Delete** — every finished download can be saved to your device; press *Keep* to move it into the server library permanently, otherwise it expires after `max_file_age_minutes`
+- **Retry failed downloads** — failed or stopped downloads with a source link have a *Retry* button. It replaces the failed row with a fresh attempt, preserving the owner, title, format and destination; the original stays in admin history. Duplicate retries of the same failed attempt are blocked. If starting the retry fails, the original stays visible and retryable. Saved failures can also be retried after a restart. Older entries without a saved format recover MP3 ZIP mode for YouTube Music `/playlist?list=…` and SoundCloud `/sets/…` links; other links use the default quality. Uploaded `.torrent` files without a source link must be uploaded again.
 - **Magnet links** — register Leecher as your browser's handler for `magnet:` links (Account page), so clicking one anywhere opens it here
 - **Admin panel** — users, file manager, download history, yt-dlp updates, runtime settings including storage paths and Transmission
 - **Live admin updates** — Server-Sent Events push file table changes to the admin panel in real time
@@ -382,6 +383,7 @@ All endpoints require a session cookie (+ `X-CSRF-Token` header for non-GET) or,
 | `GET` | `/api/jobs` 🔑 | Your downloads: running jobs plus recent history, with file links and expiry |
 | `GET` | `/api/files/{id}` 🔑 | Download a finished file (owner or admin; Range supported) |
 | `POST` | `/api/jobs/{id}/keep` 🔑 | Move a finished download into the library |
+| `POST` | `/api/jobs/{id}/retry` 🔑 | Start a new attempt for a failed or stopped download using its original link, format and destination; owners and admins only |
 | `POST` | `/api/jobs/{id}/pause`, `/api/jobs/{id}/resume` 🔑 | Pause / resume a built-in torrent |
 | `DELETE` | `/api/jobs/{id}/file` 🔑 | Delete a finished download's file |
 | `DELETE` | `/api/jobs/{id}` 🔑 | Remove a finished/failed entry from your activity list (history keeps it) |
